@@ -156,7 +156,6 @@ android {
             storeFile file('keystore.jks')
             storePassword 'RNTest@Dev'
             keyAlias 'keyalias'
-            keyPassword ''
         }
     }
     buildTypes {
