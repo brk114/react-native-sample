@@ -1,4 +1,4 @@
-package com.awesomeapprn;
+package com.techdimensionitsolutions.appcenter.demo;
 
 import com.facebook.react.ReactActivity;
 
