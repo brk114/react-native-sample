@@ -1,4 +1,5 @@
 {
   "name": "AwesomeAppRN",
-  "displayName": "AwesomeAppRN"
+  "displayName": "AwesomeAppRN",
+  "package": "com.techdimensionitsolutions.appcenter.demo"
 }
