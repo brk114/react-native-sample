@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
 
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 import com.android.build.OutputFile
 
 /**
@@ -134,8 +136,8 @@ android {
         applicationId buildConfigField("String", "APP_ID", "\"${System.env.APP_ID}\"")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName buildConfigField("String", "VERSION_NAME", "\"${System.env.VERSION_NAME}\"")
+        versionCode 20
+        versionName "1.1.2"
     }
     splits {
         abi {
@@ -162,6 +164,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug', 'release']
             if (nativeArchitectures) {
                 ndk {
                     abiFilters nativeArchitectures.split(',')
@@ -169,6 +172,7 @@ android {
             }
         }
         staging {
+            applicationId "com.techdimensionitsolutions.appcenter.staging"
             signingConfig signingConfigs.debug
             if (nativeArchitectures) {
                 ndk {
@@ -177,6 +181,7 @@ android {
             }
         }
         dev {
+            applicationId "com.techdimensionitsolutions.appcenter.dev"
             signingConfig signingConfigs.debug
             if (nativeArchitectures) {
                 ndk {

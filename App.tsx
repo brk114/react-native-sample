@@ -27,6 +27,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Config from "react-native-config";
+
 const Section: React.FC<{
   title: string;
 }> = ({ children, title }) => {
@@ -73,9 +75,12 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Section title="Configs">
+            Version name : {Config.RN_APP_VERSION_NAME}
+            API URL: {Config.RN_API_URL}
+          </Section>
           <Section title="Step One">
 
-            Version name: {process.env.VERSION_NAME}
             Edited <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
           </Section>
