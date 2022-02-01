@@ -1,4 +1,8 @@
 apply plugin: "com.android.application"
+project.ext.envConfigFiles = [
+  devrelease: ".env",
+  devdebug: ".env"
+]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
@@ -133,7 +137,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId buildConfigField("String", "APP_ID", "\"${System.env.APP_ID}\"")
+        applicationId "com.techdimensionitsolutions.appcenter.demo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 20
@@ -164,30 +168,12 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            if (nativeArchitectures) {
+                ndk {
+                    abiFilters nativeArchitectures.split(',')
+                }
+            }
             matchingFallbacks = ['debug', 'release']
-            if (nativeArchitectures) {
-                ndk {
-                    abiFilters nativeArchitectures.split(',')
-                }
-            }
-        }
-        staging {
-            applicationId "com.techdimensionitsolutions.appcenter.staging"
-            signingConfig signingConfigs.debug
-            if (nativeArchitectures) {
-                ndk {
-                    abiFilters nativeArchitectures.split(',')
-                }
-            }
-        }
-        dev {
-            applicationId "com.techdimensionitsolutions.appcenter.dev"
-            signingConfig signingConfigs.debug
-            if (nativeArchitectures) {
-                ndk {
-                    abiFilters nativeArchitectures.split(',')
-                }
-            }
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -197,6 +183,16 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
+    flavorDimensions "default"
+        productFlavors {
+            production {}
+            dev {
+                applicationIdSuffix ".dev"
+            // We can have build-specific configurations here. Like using applicationIdSuffix to create different package name (ex. ".staging")
+            }
+            development {}
+        }
 
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
