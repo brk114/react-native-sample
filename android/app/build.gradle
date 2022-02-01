@@ -186,12 +186,14 @@ android {
 
     flavorDimensions "default"
         productFlavors {
-            production {}
             dev {
                 applicationIdSuffix ".dev"
             // We can have build-specific configurations here. Like using applicationIdSuffix to create different package name (ex. ".staging")
             }
-            development {}
+            qa {
+                applicationIdSuffix ".qa"
+            }
+            prod {}
         }
 
     // applicationVariants are e.g. debug, release
