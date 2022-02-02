@@ -76,8 +76,8 @@ const App = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Section title="Configs">
-            Version name : {Config.RN_APP_VERSION_NAME}
-            API URL: {Config.RN_API_URL}
+            Version name : {Config.APP_VERSION_NAME}
+            API URL: {Config.API_URL}
           </Section>
           <Section title="Step One">
 
